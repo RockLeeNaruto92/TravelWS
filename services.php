@@ -81,6 +81,16 @@ $server->register("findByCity",
   "Find all tours in a city"
   );
 
+// checkTicketAvailable
+$server->register("checkTicketAvailable",
+  array("tour_id" => "xsd:string"), // input params
+  array("return" => "xsd:integer"), // output
+  "urn:travels", // namespace
+  "urn:travels#checkTicketAvailable",
+  "rpc",
+  "encoded",
+  "Check a tour has ticket available"
+  );
 // deploy services
 $HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : "";
 $server->service($HTTP_RAW_POST_DATA);
