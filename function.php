@@ -116,7 +116,7 @@ function isExistTour($id = NULL){
   return 1; // error_message => ID is not existed in database
 }
 
-// checking
+// ok
 function addNewContract($tour_id = NULL, $customer_id_number = NULL,
   $company_name = NULL, $company_phone = NULL,
   $company_address = NULL, $booking_tickets = 0){
@@ -163,6 +163,28 @@ function addNewContract($tour_id = NULL, $customer_id_number = NULL,
   }
   unset($db);
   return 8; // error_message => Error on execution query
+}
+
+// checking
+function findByCity($city = NULL){
+  if (isEmpty($city)) return "City is not present";
+
+  $db = new DatabaseConfig;
+  $query = "SELECT tours.* FROM tours, places WHERE places.city = '$city' and tours.place_id = places.id";
+  $result = $db->query($query);
+  unset($db);
+
+  if (mysql_num_rows($result) == 0) return "Not exist any tours";
+  else {
+    $data = array();
+    while ($row = mysql_fetch_array($result)){
+      $rowData = array();
+      foreach (DatabaseConfig::$TOURS as $value)
+        $rowData[$value] = $row[$value];
+      $data[] = $rowData;
+    }
+    return json_encode($data);
+  }
 }
 ?>
 

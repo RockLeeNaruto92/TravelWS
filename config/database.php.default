@@ -6,6 +6,8 @@ class DatabaseConfig {
   var $database;
   var $connection; // connection object
 
+  public static $TOURS = array("id", "place_id", "start_date", "tickets", "available_tickets", "cost", "description");
+
   function __construct(
     $serverName = "localhost",
     $userName = "root",
