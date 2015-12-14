@@ -201,4 +201,3 @@ function checkTicketAvailable($tour_id = NULL){
   else return 2; // error_nessage => Tourid is not existed in database
 }
 ?>
-
