@@ -46,6 +46,17 @@ $server->register("addNewTour",
   "Add new tour"
   );
 
+// isExistTour
+$server->register("isExistTour",
+  array("id" => "xsd:string"), // input params
+  array("return" => "xsd:integer"), // output
+  "urn:travels", // namespace
+  "urn:travels#isExistTour",
+  "rpc",
+  "encoded",
+  "Check tour with id is exist or not"
+  );
+
 // deploy services
 $HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : "";
 $server->service($HTTP_RAW_POST_DATA);
