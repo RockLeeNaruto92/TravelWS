@@ -21,8 +21,8 @@ USE travel_ws;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE contracts (
-    id int NOT NULL,
-    tour_id int  NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
+    tour_id varchar(45) NOT NULL,
     customer_id_number varchar(45)  NOT NULL,
     company_name varchar(45)  NOT NULL,
     company_phone varchar(45)  NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE contracts (
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE places (
-    id int  NOT NULL,
+    id varchar(45) NOT NULL,
     name varchar(45)  NOT NULL,
     city varchar(45)  NOT NULL,
     country varchar(45)  NOT NULL,
@@ -52,8 +52,8 @@ CREATE TABLE places (
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE tours (
-    id int  NOT NULL,
-    place_id int  NOT NULL,
+    id varchar(45) NOT NULL,
+    place_id varchar(45) NOT NULL,
     start_date date  NOT NULL,
     tickets int  NOT NULL,
     available_tickets int NOT NULL,
