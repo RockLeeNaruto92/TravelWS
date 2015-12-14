@@ -115,4 +115,54 @@ function isExistTour($id = NULL){
   if ($result) return -1; // ok
   return 1; // error_message => ID is not existed in database
 }
+
+// checking
+function addNewContract($tour_id = NULL, $customer_id_number = NULL,
+  $company_name = NULL, $company_phone = NULL,
+  $company_address = NULL, $booking_tickets = 0){
+  // check $customer_id_number
+  if (isEmpty($customer_id_number)) return 0; // error_message => Customer id number is not present
+
+  // check $company_name, $company_phone, $company_address
+  if (isEmpty($company_name)) return 1; // error_message => Company name is not present
+  if (isEmpty($company_phone)) return 2; // error_message => Company phone is not present
+  if (isEmpty($company_address)) return 3; // error_message => Company address is not present
+
+  // Check $tour_id
+  if (isEmpty($tour_id)) return 4; // error_message => Tourid is not present
+  $db = new DatabaseConfig;
+  $result = $db->existed("tours", "id", $tour_id);
+
+  if (!$result){
+    unset($db);
+    return 5; // error_message => Tourid is not existed in database
+  }
+
+  // check $booking tickets
+  if ($booking_tickets <= 0) {
+    unset($db);
+    return 6; // error_message => booking ticket must be greater than 0
+  }
+  if ($booking_tickets > $result["available_tickets"]){
+    unset($db);
+    return 7; // error_message => Available tickets not enough
+  }
+
+  $total_money = $booking_tickets * $result["cost"];
+  $available_tickets = $result["available_tickets"] - $booking_tickets;
+
+  $query = "INSERT INTO contracts(tour_id, customer_id_number, company_name, company_phone, company_address, booking_tickets, total_money)";
+  $query .= "VALUES ('$tour_id', '$customer_id_number', '$company_name', '$company_phone', '$company_address', $booking_tickets, $total_money)";
+
+  $result = $db->query($query);
+  if ($result){
+    $query = "UPDATE tours SET available_tickets = $available_tickets WHERE id = '$tour_id'";
+    $result = $db->query($query);
+    unset($db);
+    return -1; // ok
+  }
+  unset($db);
+  return 8; // error_message => Error on execution query
+}
 ?>
+

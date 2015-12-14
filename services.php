@@ -57,6 +57,20 @@ $server->register("isExistTour",
   "Check tour with id is exist or not"
   );
 
+// addNewContract
+$server->register("addNewContract",
+  array("tour_id" => "xsd:string", "customer_id_number" => "xsd:string",
+    "company_name" => "xsd:string", "company_phone" => "xsd:string",
+    "company_address" => "xsd:string", "booking_tickets" => "xsd:integer"), // input params
+  array("return" => "xsd:integer"), // output
+  "urn:travels", // namespace
+  "urn:travels#addNewContract",
+  "rpc",
+  "encoded",
+  "Add new contract"
+  );
+
+
 // deploy services
 $HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : "";
 $server->service($HTTP_RAW_POST_DATA);
