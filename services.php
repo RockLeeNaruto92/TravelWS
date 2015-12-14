@@ -70,6 +70,16 @@ $server->register("addNewContract",
   "Add new contract"
   );
 
+// findByCity
+$server->register("findByCity",
+  array("city" => "xsd:string"), // input params
+  array("return" => "xsd:string"), // output
+  "urn:travels", // namespace
+  "urn:travels#findByCity",
+  "rpc",
+  "encoded",
+  "Find all tours in a city"
+  );
 
 // deploy services
 $HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : "";
