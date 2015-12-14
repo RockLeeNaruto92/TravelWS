@@ -21,15 +21,15 @@ USE travel_ws;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE contracts (
-    id int NOT NULL AUTO_INCREMENT,
-    tour_id varchar(45) NOT NULL,
+    id int  NOT NULL AUTO_INCREMENT,
+    tour_id varchar(45)  NOT NULL,
     customer_id_number varchar(45)  NOT NULL,
     company_name varchar(45)  NOT NULL,
     company_phone varchar(45)  NOT NULL,
     company_address varchar(90)  NOT NULL,
     booking_tickets int  NOT NULL,
     total_money int  NOT NULL,
-    CONSTRAINT contract_pk PRIMARY KEY (id)
+    CONSTRAINT contracts_pk PRIMARY KEY (id)
 )ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -37,14 +37,14 @@ CREATE TABLE contracts (
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE places (
-    id varchar(45) NOT NULL,
+    id varchar(45)  NOT NULL,
     name varchar(45)  NOT NULL,
     city varchar(45)  NOT NULL,
     country varchar(45)  NOT NULL,
-    address varchar(90)  NOT NULL,
+    address varchar(45)  NOT NULL,
     services varchar(200)  NOT NULL,
     description varchar(10000)  NOT NULL,
-    CONSTRAINT place_pk PRIMARY KEY (id)
+    CONSTRAINT places_pk PRIMARY KEY (id)
 )ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,28 +52,29 @@ CREATE TABLE places (
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE tours (
-    id varchar(45) NOT NULL,
-    place_id varchar(45) NOT NULL,
+    id varchar(45)  NOT NULL,
+    place_id varchar(45)  NOT NULL,
     start_date date  NOT NULL,
     tickets int  NOT NULL,
-    available_tickets int NOT NULL,
+    available_tickets int  NOT NULL,
     cost int  NOT NULL,
     description varchar(10000)  NOT NULL,
-    CONSTRAINT tour_pk PRIMARY KEY (id)
+    CONSTRAINT tours_pk PRIMARY KEY (id)
 )ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
 -- foreign keys
--- Reference:  contract_tour (table: contract)
+-- Reference:  contracts_tours (table: contracts)
 
 
-ALTER TABLE contracts ADD CONSTRAINT contracts_tours FOREIGN KEY contracts(tour_id)
+ALTER TABLE contracts ADD CONSTRAINT contracts_tours FOREIGN KEY contracts_tours (tour_id)
     REFERENCES tours (id);
--- Reference:  tour_place (table: tour)
+-- Reference:  tours_places (table: tours)
 
 
-ALTER TABLE tours ADD CONSTRAINT tours_places FOREIGN KEY tours(place_id)
-    REFERENCES place (id);
+ALTER TABLE tours ADD CONSTRAINT tours_places FOREIGN KEY tours_places (place_id)
+    REFERENCES places (id);
 
 
 
