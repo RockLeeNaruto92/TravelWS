@@ -59,7 +59,7 @@ function isExistPlace($id = NULL){
   else return 1; // error_message => Id is not existed in database
 }
 
-// checking
+// ok
 function addNewTour($id = NULL, $place_id = NULL, $start_date = NULL,
   $tickets = 0, $cost = 0, $description = NULL){
   // check $start_date
@@ -102,5 +102,17 @@ function addNewTour($id = NULL, $place_id = NULL, $start_date = NULL,
   $result = $db->query($query);
   if ($result) return -1; // ok
   return 9; // error_message => Error on execution query
+}
+
+// ok
+function isExistTour($id = NULL){
+  if (isEmpty($id)) return 0; // error_message => id is not present
+
+  $db = new DatabaseConfig;
+  $result = $db->existed("tours", "id", $id);
+  unset($db);
+
+  if ($result) return -1; // ok
+  return 1; // error_message => ID is not existed in database
 }
 ?>
