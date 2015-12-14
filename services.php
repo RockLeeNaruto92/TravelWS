@@ -33,6 +33,19 @@ $server->register("isExistPlace",
   "Check place with id is exist or not"
   );
 
+// addNewTour
+$server->register("addNewTour",
+  array("id" => "xsd:string", "place_id" => "xsd:string",
+    "start_date" => "xsd:string", "tickets" => "xsd:integer",
+    "cost" => "xsd:integer", "description" => "xsd:string"), // input params
+  array("return" => "xsd:integer"), // output
+  "urn:travels", // namespace
+  "urn:travels#addNewTour",
+  "rpc",
+  "encoded",
+  "Add new tour"
+  );
+
 // deploy services
 $HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : "";
 $server->service($HTTP_RAW_POST_DATA);
