@@ -1,0 +1,174 @@
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:travels" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:travels">
+  <types>
+    <xsd:schema targetNamespace="urn:travels">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+    </xsd:schema>
+  </types>
+  <message name="addNewPlaceRequest">
+    <part name="id" type="xsd:string"/>
+    <part name="name" type="xsd:string"/>
+    <part name="city" type="xsd:string"/>
+    <part name="country" type="xsd:string"/>
+    <part name="address" type="xsd:string"/>
+    <part name="services" type="xsd:string"/>
+    <part name="description" type="xsd:string"/>
+  </message>
+  <message name="addNewPlaceResponse">
+    <part name="return" type="xsd:integer"/>
+  </message>
+  <message name="isExistPlaceRequest">
+    <part name="id" type="xsd:string"/>
+  </message>
+  <message name="isExistPlaceResponse">
+    <part name="return" type="xsd:integer"/>
+  </message>
+  <message name="addNewTourRequest">
+    <part name="id" type="xsd:string"/>
+    <part name="place_id" type="xsd:string"/>
+    <part name="start_date" type="xsd:string"/>
+    <part name="tickets" type="xsd:integer"/>
+    <part name="cost" type="xsd:integer"/>
+    <part name="description" type="xsd:string"/>
+  </message>
+  <message name="addNewTourResponse">
+    <part name="return" type="xsd:integer"/>
+  </message>
+  <message name="isExistTourRequest">
+    <part name="id" type="xsd:string"/>
+  </message>
+  <message name="isExistTourResponse">
+    <part name="return" type="xsd:integer"/>
+  </message>
+  <message name="addNewContractRequest">
+    <part name="tour_id" type="xsd:string"/>
+    <part name="customer_id_number" type="xsd:string"/>
+    <part name="company_name" type="xsd:string"/>
+    <part name="company_phone" type="xsd:string"/>
+    <part name="company_address" type="xsd:string"/>
+    <part name="booking_tickets" type="xsd:integer"/>
+  </message>
+  <message name="addNewContractResponse">
+    <part name="return" type="xsd:integer"/>
+  </message>
+  <message name="findByCityRequest">
+    <part name="city" type="xsd:string"/>
+  </message>
+  <message name="findByCityResponse">
+    <part name="return" type="xsd:string"/>
+  </message>
+  <message name="checkTicketAvailableRequest">
+    <part name="tour_id" type="xsd:string"/>
+  </message>
+  <message name="checkTicketAvailableResponse">
+    <part name="return" type="xsd:integer"/>
+  </message>
+  <portType name="travelsPortType">
+    <operation name="addNewPlace">
+      <documentation>Add new place</documentation>
+      <input message="tns:addNewPlaceRequest"/>
+      <output message="tns:addNewPlaceResponse"/>
+    </operation>
+    <operation name="isExistPlace">
+      <documentation>Check place with id is exist or not</documentation>
+      <input message="tns:isExistPlaceRequest"/>
+      <output message="tns:isExistPlaceResponse"/>
+    </operation>
+    <operation name="addNewTour">
+      <documentation>Add new tour</documentation>
+      <input message="tns:addNewTourRequest"/>
+      <output message="tns:addNewTourResponse"/>
+    </operation>
+    <operation name="isExistTour">
+      <documentation>Check tour with id is exist or not</documentation>
+      <input message="tns:isExistTourRequest"/>
+      <output message="tns:isExistTourResponse"/>
+    </operation>
+    <operation name="addNewContract">
+      <documentation>Add new contract</documentation>
+      <input message="tns:addNewContractRequest"/>
+      <output message="tns:addNewContractResponse"/>
+    </operation>
+    <operation name="findByCity">
+      <documentation>Find all tours in a city</documentation>
+      <input message="tns:findByCityRequest"/>
+      <output message="tns:findByCityResponse"/>
+    </operation>
+    <operation name="checkTicketAvailable">
+      <documentation>Check a tour has ticket available</documentation>
+      <input message="tns:checkTicketAvailableRequest"/>
+      <output message="tns:checkTicketAvailableResponse"/>
+    </operation>
+  </portType>
+  <binding name="travelsBinding" type="tns:travelsPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="addNewPlace">
+      <soap:operation soapAction="urn:travels#addNewPlace" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="isExistPlace">
+      <soap:operation soapAction="urn:travels#isExistPlace" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="addNewTour">
+      <soap:operation soapAction="urn:travels#addNewTour" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="isExistTour">
+      <soap:operation soapAction="urn:travels#isExistTour" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="addNewContract">
+      <soap:operation soapAction="urn:travels#addNewContract" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="findByCity">
+      <soap:operation soapAction="urn:travels#findByCity" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="checkTicketAvailable">
+      <soap:operation soapAction="urn:travels#checkTicketAvailable" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="travels">
+    <port name="travelsPort" binding="tns:travelsBinding">
+      <soap:address location="http://localhost/TravelWS/services.php"/>
+    </port>
+  </service>
+</definitions>
