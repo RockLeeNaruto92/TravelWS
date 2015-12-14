@@ -6,7 +6,7 @@ require_once "function.php";
 
 // config server's services
 $server = new soap_server;
-$server->configureWSDL("hotels", "urn:hotels");
+$server->configureWSDL("travels", "urn:travels");
 
 // addNewPlace
 $server->register("addNewPlace",
@@ -15,11 +15,22 @@ $server->register("addNewPlace",
     "address" => "xsd:string", "services" => "xsd:string",
     "description" => "xsd:string"), // input params
   array("return" => "xsd:integer"), // output
-  "urn:hotels", // namespace
-  "urn:hotels#addNewPlace",
+  "urn:travels", // namespace
+  "urn:travels#addNewPlace",
   "rpc",
   "encoded",
   "Add new place"
+  );
+
+// isExistPlace
+$server->register("isExistPlace",
+  array("id" => "xsd:string"), // input params
+  array("return" => "xsd:integer"), // output
+  "urn:travels", // namespace
+  "urn:travels#isExistPlace",
+  "rpc",
+  "encoded",
+  "Check place with id is exist or not"
   );
 
 // deploy services

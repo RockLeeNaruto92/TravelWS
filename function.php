@@ -9,7 +9,7 @@ function isValidTimeFormat($time){
   return strtotime($time) != NULL;
 }
 
-// checking
+// ok
 function addNewPlace($id = NULL, $name = NULL, $city = NULL,
   $country = NULL, $address = NULL, $services = NULL, $description = NULL){
   // check $name
@@ -45,5 +45,17 @@ function addNewPlace($id = NULL, $name = NULL, $city = NULL,
 
   if ($result) return -1; // OK
   else return 8; // error_message => Error on execution query
+}
+
+// checking
+function isExistPlace($id = NULL){
+  if (isEmpty($id)) return 0; // error_message => ID is not present
+
+  $db = new DatabaseConfig;
+  $result = $db->existed("places", "id", $id);
+  unset($db);
+
+  if ($result) return -1; // OK
+  else return 1; // error_message => Id is not existed in database
 }
 ?>
