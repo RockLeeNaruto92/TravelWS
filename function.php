@@ -165,7 +165,7 @@ function addNewContract($tour_id = NULL, $customer_id_number = NULL,
   return 8; // error_message => Error on execution query
 }
 
-// checking
+// ok
 function findByCity($city = NULL){
   if (isEmpty($city)) return "City is not present";
 
@@ -185,6 +185,20 @@ function findByCity($city = NULL){
     }
     return json_encode($data);
   }
+}
+
+// checking
+function checkTicketAvailable($tour_id = NULL){
+  if (isEmpty($tour_id)) return 0; // error_message => $tour_id is not present
+
+  $db = new DatabaseConfig;
+  $result = $db->existed("tours", "id", $tour_id);
+  unset($db);
+
+  if ($result)
+    if ($result["available_tickets"] > 0) return -1; // ok
+    else return 1; // error_message => No ticket available
+  else return 2; // error_nessage => Tourid is not existed in database
 }
 ?>
 
