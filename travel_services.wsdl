@@ -23,6 +23,12 @@
   <message name="isExistPlaceResponse">
     <part name="return" type="xsd:integer"/>
   </message>
+  <message name="findTourByIdRequest">
+    <part name="id" type="xsd:string"/>
+  </message>
+  <message name="findTourByIdResponse">
+    <part name="return" type="xsd:string"/>
+  </message>
   <message name="addNewTourRequest">
     <part name="id" type="xsd:string"/>
     <part name="place_id" type="xsd:string"/>
@@ -74,6 +80,11 @@
       <input message="tns:isExistPlaceRequest"/>
       <output message="tns:isExistPlaceResponse"/>
     </operation>
+    <operation name="findTourById">
+      <documentation>Find tour by tour_id</documentation>
+      <input message="tns:findTourByIdRequest"/>
+      <output message="tns:findTourByIdResponse"/>
+    </operation>
     <operation name="addNewTour">
       <documentation>Add new tour</documentation>
       <input message="tns:addNewTourRequest"/>
@@ -113,6 +124,15 @@
     </operation>
     <operation name="isExistPlace">
       <soap:operation soapAction="urn:travels#isExistPlace" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="findTourById">
+      <soap:operation soapAction="urn:travels#findTourById" style="rpc"/>
       <input>
         <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </input>
