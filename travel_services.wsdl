@@ -40,6 +40,17 @@
   <message name="addNewTourResponse">
     <part name="return" type="xsd:integer"/>
   </message>
+  <message name="updateTourRequest">
+    <part name="id" type="xsd:string"/>
+    <part name="place_id" type="xsd:string"/>
+    <part name="start_date" type="xsd:string"/>
+    <part name="tickets" type="xsd:integer"/>
+    <part name="cost" type="xsd:integer"/>
+    <part name="description" type="xsd:string"/>
+  </message>
+  <message name="updateTourResponse">
+    <part name="return" type="xsd:integer"/>
+  </message>
   <message name="isExistTourRequest">
     <part name="id" type="xsd:string"/>
   </message>
@@ -93,6 +104,11 @@
       <documentation>Add new tour</documentation>
       <input message="tns:addNewTourRequest"/>
       <output message="tns:addNewTourResponse"/>
+    </operation>
+    <operation name="updateTour">
+      <documentation>Update a tour information</documentation>
+      <input message="tns:updateTourRequest"/>
+      <output message="tns:updateTourResponse"/>
     </operation>
     <operation name="isExistTour">
       <documentation>Check tour with id is exist or not</documentation>
@@ -151,6 +167,15 @@
     </operation>
     <operation name="addNewTour">
       <soap:operation soapAction="urn:travels#addNewTour" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="updateTour">
+      <soap:operation soapAction="urn:travels#updateTour" style="rpc"/>
       <input>
         <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </input>
