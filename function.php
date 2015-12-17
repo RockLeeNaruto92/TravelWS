@@ -281,4 +281,23 @@ function updateTour($id = NULL, $place_id = NULL, $start_date = NULL,
   return 9; // error_message => Error on execution query
 }
 
+// ok
+function getAllTours(){
+  $db = new DatabaseConfig;
+  $query = "SELECT * FROM tours";
+  $result = $db->query($query);
+  unset($db);
+
+  if (mysql_num_rows($result) == 0) return "Not exist any tours";
+  else {
+    $data = array();
+    while ($row = mysql_fetch_array($result)){
+      $rowData = array();
+      foreach (DatabaseConfig::$TOURS as $value)
+        $rowData[$value] = $row[$value];
+      $data[] = $rowData;
+    }
+    return json_encode($data);
+  }
+}
 ?>

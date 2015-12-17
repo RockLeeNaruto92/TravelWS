@@ -84,6 +84,10 @@
   <message name="getAllPlacesResponse">
     <part name="return" type="xsd:string"/>
   </message>
+  <message name="getAllToursRequest"/>
+  <message name="getAllToursResponse">
+    <part name="return" type="xsd:string"/>
+  </message>
   <portType name="travelsPortType">
     <operation name="addNewPlace">
       <documentation>Add new place</documentation>
@@ -134,6 +138,11 @@
       <documentation>Get all places in database</documentation>
       <input message="tns:getAllPlacesRequest"/>
       <output message="tns:getAllPlacesResponse"/>
+    </operation>
+    <operation name="getAllTours">
+      <documentation>Get all places in database</documentation>
+      <input message="tns:getAllToursRequest"/>
+      <output message="tns:getAllToursResponse"/>
     </operation>
   </portType>
   <binding name="travelsBinding" type="tns:travelsPortType">
@@ -221,6 +230,15 @@
     </operation>
     <operation name="getAllPlaces">
       <soap:operation soapAction="urn:travels#getAllPlaces" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="getAllTours">
+      <soap:operation soapAction="urn:travels#getAllTours" style="rpc"/>
       <input>
         <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </input>

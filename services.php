@@ -126,6 +126,17 @@ $server->register("getAllPlaces",
   "encoded",
   "Get all places in database"
   );
+
+// getAllTours
+$server->register("getAllTours",
+  array(), // input params
+  array("return" => "xsd:string"), // output
+  "urn:travels", // namespace
+  "urn:travels#getAllTours",
+  "rpc",
+  "encoded",
+  "Get all places in database"
+  );
 // deploy services
 $HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : "";
 $server->service($HTTP_RAW_POST_DATA);
