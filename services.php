@@ -33,6 +33,17 @@ $server->register("isExistPlace",
   "Check place with id is exist or not"
   );
 
+// findTourById
+$server->register("findTourById",
+  array("id" => "xsd:string"), // input params
+  array("return" => "xsd:string"), // output
+  "urn:travels", // namespace
+  "urn:travels#findTourById",
+  "rpc",
+  "encoded",
+  "Find tour by tour_id"
+  );
+
 // addNewTour
 $server->register("addNewTour",
   array("id" => "xsd:string", "place_id" => "xsd:string",

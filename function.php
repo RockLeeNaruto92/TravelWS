@@ -200,4 +200,20 @@ function checkTicketAvailable($tour_id = NULL){
     else return 1; // error_message => No ticket available
   else return 2; // error_nessage => Tourid is not existed in database
 }
+
+// ok
+function findTourById($id = NULL){
+  if (isEmpty($id)) return "Id is not present";
+
+  $db = new DatabaseConfig;
+  $result = $db->existed("tours", "id", $id);
+  unset($db);
+
+  if ($result){
+    $data = array();
+    foreach (DatabaseConfig::$TOURS as $value)
+      $data[$value] = $result[$value];
+    return json_encode($data);
+  } else return "Tour is not existed in database.";
+}
 ?>
