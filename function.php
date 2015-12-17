@@ -234,4 +234,51 @@ function getAllPlaces(){
   }
   return json_encode($data);
 }
+
+// ok
+function updateTour($id = NULL, $place_id = NULL, $start_date = NULL,
+  $tickets = 0, $cost = 0, $description = NULL){
+  // check $start_date
+  if (isEmpty($start_date)) return 0; // error_message => start date is not present
+  if (!isValidTimeFormat($start_date)) return 1; //error_message => start_date is not have true format
+
+  // check $ticket, $cost
+  if ($tickets <= 0) return 2; // error_message => ticket must be greater than 0
+  if ($cost <= 0) return 3; // error_message => $cost must be greater than 0
+
+  // check $description
+  if (isEmpty($description)) return 4; // error_message => description is not present
+
+  // check $place_id
+  if (isEmpty($place_id)) return 5; // error_message => place id is not present
+
+  $db = new DatabaseConfig;
+  $result = $db->existed("places", "id", $place_id);
+
+  if (!$result) {
+    unset($db);
+    return 6; // error_message => Place id is not existed in database
+  }
+
+  // check id
+  if (isEmpty($id)) {
+    unset($db);
+    return 7; // error_message => Id is not present
+  }
+
+  $result = $db->existed("tours", "id", $id);
+  if (!$result) {
+    unset($db);
+    return 8; // error_message => Id is not existed in databse
+  }
+
+  $query = "UPDATE tours ";
+  $query .= "SET place_id = '$place_id', start_date = '$start_date', tickets = $tickets, cost = $cost, description = '$description' ";
+  $query .= "WHERE id = '$id'";
+
+  $result = $db->query($query);
+  if ($result) return -1; // ok
+  return 9; // error_message => Error on execution query
+}
+
 ?>

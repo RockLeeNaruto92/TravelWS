@@ -57,6 +57,19 @@ $server->register("addNewTour",
   "Add new tour"
   );
 
+// updateTour
+$server->register("updateTour",
+  array("id" => "xsd:string", "place_id" => "xsd:string",
+    "start_date" => "xsd:string", "tickets" => "xsd:integer",
+    "cost" => "xsd:integer", "description" => "xsd:string"), // input params
+  array("return" => "xsd:integer"), // output
+  "urn:travels", // namespace
+  "urn:travels#updateTour",
+  "rpc",
+  "encoded",
+  "Update a tour information"
+  );
+
 // isExistTour
 $server->register("isExistTour",
   array("id" => "xsd:string"), // input params
