@@ -102,6 +102,17 @@ $server->register("checkTicketAvailable",
   "encoded",
   "Check a tour has ticket available"
   );
+
+// getAllPlaces
+$server->register("getAllPlaces",
+  array(), // input params
+  array("return" => "xsd:string"), // output
+  "urn:travels", // namespace
+  "urn:travels#getAllPlaces",
+  "rpc",
+  "encoded",
+  "Get all places in database"
+  );
 // deploy services
 $HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : "";
 $server->service($HTTP_RAW_POST_DATA);
