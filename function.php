@@ -216,4 +216,22 @@ function findTourById($id = NULL){
     return json_encode($data);
   } else return "Tour is not existed in database.";
 }
+
+// ok
+function getAllPlaces(){
+  $db = new DatabaseConfig;
+  $query = "SELECT * FROM places";
+  $result = $db->query($query);
+  unset($db);
+
+  if (!$result) return "Travel WS have 0 places";
+  $data = array();
+  while ($row = mysql_fetch_array($result)){
+    $rowData = array();
+    foreach (DatabaseConfig::$PLACES as $value)
+      $rowData[$value] = $row[$value];
+    $data[] = $rowData;
+  }
+  return json_encode($data);
+}
 ?>

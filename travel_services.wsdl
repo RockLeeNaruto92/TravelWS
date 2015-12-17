@@ -69,6 +69,10 @@
   <message name="checkTicketAvailableResponse">
     <part name="return" type="xsd:integer"/>
   </message>
+  <message name="getAllPlacesRequest"/>
+  <message name="getAllPlacesResponse">
+    <part name="return" type="xsd:string"/>
+  </message>
   <portType name="travelsPortType">
     <operation name="addNewPlace">
       <documentation>Add new place</documentation>
@@ -109,6 +113,11 @@
       <documentation>Check a tour has ticket available</documentation>
       <input message="tns:checkTicketAvailableRequest"/>
       <output message="tns:checkTicketAvailableResponse"/>
+    </operation>
+    <operation name="getAllPlaces">
+      <documentation>Get all places in database</documentation>
+      <input message="tns:getAllPlacesRequest"/>
+      <output message="tns:getAllPlacesResponse"/>
     </operation>
   </portType>
   <binding name="travelsBinding" type="tns:travelsPortType">
@@ -178,6 +187,15 @@
     </operation>
     <operation name="checkTicketAvailable">
       <soap:operation soapAction="urn:travels#checkTicketAvailable" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="getAllPlaces">
+      <soap:operation soapAction="urn:travels#getAllPlaces" style="rpc"/>
       <input>
         <soap:body use="encoded" namespace="urn:travels" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </input>
